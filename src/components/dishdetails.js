@@ -8,7 +8,7 @@ class Dishdetail extends Component {
         const {dish} = this.props;
         return ( 
             <div className="row">
-
+    
             {this.renderDish(dish)}
 
             </div>
@@ -48,24 +48,38 @@ class Dishdetail extends Component {
 
         if (comments!=null)
         {
-            const com = comments.map(commts=>{
-
+            const com = comments.map(co=>{
+                    
                     return(
-                    <ul className="list-unstyled">
-                    <li>{commts.comment}</li><br />
-                    <li>-- {commts.author}, {this.commts.date}</li><br />
-                    </ul>
+                    <React.Fragment>
+                    <li>{co.comment}</li><br />
+                    <li>-- {co.author}, {this.formatDate(co.date)}</li><br />
+                    </React.Fragment>
                 )
-
+                    
                 }
                 );
+            return(
+                <ul className="list-unstyled">
+                {com}
+                </ul>
+            )
         }
         else{
             return(<div></div>)
         }
     }
+
+    formatDate(date)
+{
+    const option = {year: 'numeric', month: 'short', day: 'numeric' };
+    const date1 = new Date(date)
+    const newdate = date1.toLocaleDateString("en-US", option)
+    return newdate;
+
+}
 }
 
 
-
+ 
 export default Dishdetail;
